@@ -85,5 +85,5 @@ adding the `Colonized` tag on success.
 > Note: `beetles_per_tree` * `trees_per_beetles` = $R_0$ of the system.
 
 > Note: With $\sigma = 1-\text{removal-probability}$ (from tree removal)
-> and $p$ being the target beetle prevalence (in damaged trees), theoretically:
+> and $p$ being the target beetle prevalence (in damaged trees), theoretically:  
 > $$R_0 = \dfrac{1}{\sigma(1-\sigma p)}$$
