@@ -86,6 +86,4 @@ adding the `Colonized` tag on success.
 
 > Note: With $\sigma = 1-\text{removal-probability}$ (from tree removal)
 > and $p$ being the target beetle prevalence (in damaged trees), theoretically:
-> $$
-> R_0 = \dfrac{1}{\sigma(1-\sigma p)}
-> $$
+> $$R_0 = \dfrac{1}{\sigma(1-\sigma p)}$$
