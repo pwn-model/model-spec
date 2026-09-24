@@ -101,7 +101,7 @@ with $k$ = `density_weight`. Thus, denser tree clusters attract beetles from far
 
 Beetles move on the fine grid, making `steps_per_tick` steps per tick.
 For the first `duration_feeding` ticks after emergence, beetles are feeding and target healthy trees.
-For the following `duration_egg_laying` ticks, they are egg laying and target damaged trees.
+For the following `duration_egg_laying` ticks, they are egg laying and target damaged trees [not yet implemented, see [Background beetle colonization](#background-beetle-colonization) for now].
 Afterwards, they are inactive.
 
 In each step, a beetle on a target tree stays there with probability 1 - `leave_tree_probability`.
