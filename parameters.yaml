@@ -3,6 +3,8 @@
 # Mirrors the structure of the model config file (e.g. pwn/config.yaml):
 # resources and systems in config order, each with its config `type` and a
 # list of its parameters. `value` is the default, as used in pwn/config.yaml.
+# A type that appears more than once (e.g. TreeAttraction) has a `label` to
+# tell its entries apart in parameter tables.
 #
 # Parameter fields:
 #   name:        config key
@@ -187,6 +189,7 @@ systems:
         source: TODO
 
   - type: TreeAttraction
+    label: damaged
     description: Attraction field of damaged trees, guiding beetles during egg laying
     parameters:
       - name: tick_of_year
@@ -231,6 +234,7 @@ systems:
         source: TODO
 
   - type: TreeAttraction
+    label: healthy
     description: Attraction field of healthy trees, guiding beetles during maturation feeding
     parameters:
       - name: tick_of_year
