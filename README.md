@@ -30,29 +30,15 @@ The model has a weekly time step.
 Trees are positioned on a grid with either one large tree or multiple small trees per cell.
 Cell size is in the order of magnitude of 10m.
 
-Another spatial grid structure of approx. 500m grid cells is used for vector dispersal and search flights.
-This results in 2500 trees per grid cell.
-
-```
-        ______________  _
-       /_/_/_/_/_/_/_/---\--- 10x10m cell for trees
-      /_/_/_/_/_/_/_/    |
-     /_/_/_/_/_/_/_/     |
-    /_/_/_/_/_/_/_/       > 500x500m cell for vector dispersal
-   /_/_/_/_/_/_/_/       |
-  /_/_/_/_/_/_/_/        |
- /_/_/_/_/_/_/_/        _/
-```
-
 ## Submodels
 
 ### Initialization
 
-Each coarse grid cell is forested with probability `cell_probability`.
-In forested cells, each fine cell holds a tree with probability `tree_probability`.
+The world is divided into blocks of 1×1 km (rounded to whole tree cells; blocks at the
+upper world edges may be smaller), and each block is forested with probability `km2_probability`.
+In forested blocks, each tree cell holds a tree with probability `tree_probability`.
 A tree is initially damaged with probability `damage_prevalence` (`Damaged` tag),
 and a damaged tree is additionally colonized with probability `beetle_prevalence` (`Colonized` tag).
-Each tree is linked to its containing coarse cell.
 
 ### Time
 
@@ -65,8 +51,8 @@ Infected trees become damaged (`Damaged` tag) `ticks_to_damage` ticks after infe
 
 ### Nematode release
 
-At tick `tick_of_infection`, `num_trees` randomly selected healthy, uninfected trees
-in the coarse cell (`cell_x`, `cell_y`) are infected with nematodes (`Infected` tag, with the time of infection).
+At tick `tick_of_infection`, `num_trees` healthy, uninfected trees, randomly selected
+from the entire world, are infected with nematodes (`Infected` tag, with the time of infection).
 
 ### Background tree removal
 
