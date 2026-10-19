@@ -1,0 +1,399 @@
+# Documentation of the PWN model parameters.
+#
+# Mirrors the structure of the model config file (e.g. pwn/config.yaml):
+# resources and systems in config order, each with its config `type` and a
+# list of its parameters. `value` is the default, as used in pwn/config.yaml.
+#
+# Parameter fields:
+#   name:        config key
+#   symbol:      symbol for use in equations/tables ("-" if none yet)
+#   description: meaning of the parameter
+#   value:       default value
+#   unit:        physical unit ("-" for dimensionless)
+#   range:       plausible range [min, max], or null if not applicable
+#   category:    technical | ecological | management | scenario
+#   source:      literature or other source of the value
+#
+# One model tick is one week.
+
+resources:
+  - type: WorldSize
+    description: Spatial extent of the world and resolution of the tree grid
+    parameters:
+      - name: width
+        symbol: "-"
+        description: World size in east-west direction. Must be a multiple of cell_size
+        value: 4000
+        unit: m
+        range: [1000, 100000]
+        category: technical
+        source: None, technical parameter
+      - name: height
+        symbol: "-"
+        description: World size in north-south direction. Must be a multiple of cell_size
+        value: 3000
+        unit: m
+        range: [1000, 100000]
+        category: technical
+        source: None, technical parameter
+      - name: cell_size
+        symbol: "-"
+        description: Cell size of the fine tree grid, holding at most one tree per cell
+        value: 10
+        unit: m
+        range: [5, 20]
+        category: technical
+        source: TODO
+
+systems:
+  - type: InitGrids
+    description: Initializes the fine tree grid
+    parameters: []
+
+  - type: InitTrees
+    description: Initializes trees and their damage and beetle colonization state
+    parameters:
+      - name: km2_probability
+        symbol: "-"
+        description: Probability that a 1x1 km block is forested
+        value: 0.6
+        unit: "-"
+        range: [0, 1]
+        category: scenario
+        source: None, preliminary to generate heterogeneous landscapes
+      - name: tree_probability
+        symbol: "-"
+        description: Probability that a fine grid cell within a forested block holds a tree
+        value: 0.9
+        unit: "-"
+        range: [0, 1]
+        category: ecological
+        source: TODO
+      - name: damage_prevalence
+        symbol: "-"
+        description: Initial proportion of damaged trees
+        value: 0.03
+        unit: "-"
+        range: [0, 1]
+        category: ecological
+        source: TODO
+      - name: beetle_prevalence
+        symbol: "-"
+        description: Initial proportion of damaged trees that are colonized by beetles
+        value: 0.2
+        unit: "-"
+        range: [0, 1]
+        category: ecological
+        source: TODO
+
+  - type: UpdateTime
+    description: Updates model time
+    parameters:
+      - name: ticks_per_year
+        symbol: "-"
+        description: Number of model ticks per year
+        value: 52
+        unit: ticks / year
+        range: null
+        category: technical
+        source: None, technical parameter
+
+  - type: DiseaseCourse
+    description: Progression of nematode-infected trees to damaged state
+    parameters:
+      - name: ticks_to_damage
+        symbol: "-"
+        description: Time from nematode infection of a tree until it becomes damaged
+        value: 8
+        unit: weeks
+        range: TODO
+        category: ecological
+        source: TODO
+
+  - type: RandomRelease
+    description: Initial introduction of the nematode by infecting randomly selected trees anywhere in the world
+    parameters:
+      - name: tick_of_infection
+        symbol: "-"
+        description: Model tick at which the trees are infected
+        value: 0
+        unit: weeks
+        range: null
+        category: scenario
+        source: None, scenario parameter
+      - name: num_trees
+        symbol: "-"
+        description: Number of trees to infect. Capped at the number of undamaged, uninfected trees
+        value: 10
+        unit: trees
+        range: null
+        category: scenario
+        source: None, scenario parameter
+
+  - type: DamageTrees
+    description: Annual background damage of trees (by causes other than the nematode) and removal of damaged trees
+    parameters:
+      - name: tick_of_year
+        symbol: "-"
+        description: Week of the year when trees are damaged and removed
+        value: 35
+        unit: week
+        range: [0, 51]
+        category: ecological
+        source: TODO
+      - name: damage_probability
+        symbol: "-"
+        description: Annual probability of an undamaged tree to become damaged
+        value: 0.01
+        unit: 1 / year
+        range: [0, 1]
+        category: ecological
+        source: TODO
+      - name: removal_probability
+        symbol: "-"
+        description: Annual probability of a damaged tree to be removed
+        value: 0.333
+        unit: 1 / year
+        range: [0, 1]
+        category: management
+        source: TODO
+
+  - type: BeetleEmergence
+    description: Annual emergence of nematode-carrying beetles from damaged, infected trees
+    parameters:
+      - name: tick_of_year
+        symbol: "-"
+        description: Week of the year when beetles emerge
+        value: 19
+        unit: week
+        range: [0, 51]
+        category: ecological
+        source: TODO
+      - name: beetles_per_tree
+        symbol: "-"
+        description: Number of beetles emerging from each damaged, infected tree
+        value: 5
+        unit: beetles / tree
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: life_expectancy
+        symbol: "-"
+        description: Mean adult beetle life span (exponentially distributed)
+        value: 5
+        unit: weeks
+        range: TODO
+        category: ecological
+        source: TODO
+
+  - type: TreeAttraction
+    description: Attraction field of damaged trees, guiding beetles during egg laying
+    parameters:
+      - name: tick_of_year
+        symbol: "-"
+        description: Week of the year when the attraction field is calculated
+        value: 18
+        unit: week
+        range: [0, 51]
+        category: technical
+        source: None, technical parameter
+      - name: damaged_trees
+        symbol: "-"
+        description: Whether this instance computes the attraction of damaged (true) or healthy (false) trees
+        value: true
+        unit: "-"
+        range: null
+        category: technical
+        source: None, technical parameter
+      - name: half_distance
+        symbol: "-"
+        description: Distance at which a tree's attraction has decayed to half its value at the tree
+        value: 50
+        unit: m
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: density_radius
+        symbol: "-"
+        description: Radius within which neighboring damaged trees count towards a tree's local density. Must be a multiple of the fine cell size
+        value: 20
+        unit: m
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: density_weight
+        symbol: "-"
+        description: Exponent applied to a tree's local density to scale its attraction. 0 disables the density effect
+        value: 1.0
+        unit: "-"
+        range: TODO
+        category: ecological
+        source: TODO
+
+  - type: TreeAttraction
+    description: Attraction field of healthy trees, guiding beetles during maturation feeding
+    parameters:
+      - name: tick_of_year
+        symbol: "-"
+        description: Week of the year when the attraction field is calculated
+        value: 18
+        unit: week
+        range: [0, 51]
+        category: technical
+        source: None, technical parameter
+      - name: damaged_trees
+        symbol: "-"
+        description: Whether this instance computes the attraction of damaged (true) or healthy (false) trees
+        value: false
+        unit: "-"
+        range: null
+        category: technical
+        source: None, technical parameter
+      - name: half_distance
+        symbol: "-"
+        description: Distance at which a tree's attraction has decayed to half its value at the tree
+        value: 50
+        unit: m
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: density_radius
+        symbol: "-"
+        description: Radius within which neighboring healthy trees count towards a tree's local density. Must be a multiple of the fine cell size
+        value: 20
+        unit: m
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: density_weight
+        symbol: "-"
+        description: Exponent applied to a tree's local density to scale its attraction. 0 disables the density effect
+        value: 1.0
+        unit: "-"
+        range: TODO
+        category: ecological
+        source: TODO
+
+  - type: BeetleMovement
+    description: Movement of nematode-carrying beetles during maturation feeding and egg laying
+    parameters:
+      - name: steps_per_tick
+        symbol: "-"
+        description: Number of movement steps (to a neighboring fine grid cell) per week
+        value: 7
+        unit: steps / week
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: duration_feeding
+        symbol: "-"
+        description: Duration of the maturation feeding phase after emergence
+        value: 6
+        unit: weeks
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: duration_egg_laying
+        symbol: "-"
+        description: Duration of the egg laying phase after maturation feeding
+        value: 6
+        unit: weeks
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: leave_tree_probability
+        symbol: "-"
+        description: Per-step probability of a beetle to leave a suitable tree
+        value: 0.25
+        unit: 1 / step
+        range: [0, 1]
+        category: ecological
+        source: TODO
+      - name: random_walk_probability
+        symbol: "-"
+        description: Per-step probability of a moving beetle to move to a random neighbor cell rather than the most attractive one
+        value: 0.6
+        unit: 1 / step
+        range: [0, 1]
+        category: ecological
+        source: TODO
+
+  - type: BeetleMortality
+    description: Removal of beetles that reached the end of their life span
+    parameters: []
+
+  - type: Colonization
+    description: Annual background spread of beetles (without nematodes) to damaged trees, via a dispersal kernel
+    parameters:
+      - name: tick_of_year
+        symbol: "-"
+        description: Week of the year when colonization takes place
+        value: 20
+        unit: week
+        range: [0, 51]
+        category: ecological
+        source: TODO
+      - name: cell_size
+        symbol: "-"
+        description: Cell size of the dispersal grid
+        value: 100
+        unit: m
+        range: TODO
+        category: technical
+        source: None, technical parameter
+      - name: kernel_half_distance
+        symbol: "-"
+        description: Distance at which the dispersal kernel's weight has decayed to half its value at the source cell
+        value: 50
+        unit: m
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: kernel_radius
+        symbol: "-"
+        description: Cutoff radius of the dispersal kernel. Rounded up to full cells
+        value: 300
+        unit: m
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: beetles_per_tree
+        symbol: "-"
+        description: Number of beetles emerging from each colonized tree per year
+        value: 2.0
+        unit: beetles / tree / year
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: trees_per_beetle
+        symbol: "-"
+        description: Mean number of damaged trees within a cell that an arriving beetle attempts to colonize
+        value: 1.0
+        unit: trees / beetle
+        range: TODO
+        category: ecological
+        source: TODO
+
+  - type: NematodeInfection
+    description: Infection of healthy trees by feeding, nematode-carrying beetles
+    parameters:
+      - name: infection_probability
+        symbol: "-"
+        description: Probability of a tree to become infected per feeding step of a beetle on it
+        value: 0.01
+        unit: 1 / step
+        range: [0, 1]
+        category: ecological
+        source: TODO
+
+  - type: FixedTermination
+    description: Stops the simulation after a fixed number of ticks
+    parameters:
+      - name: steps
+        symbol: "-"
+        description: Number of simulation ticks to run
+        value: 5200
+        unit: weeks
+        range: null
+        category: technical
+        source: None, technical parameter
