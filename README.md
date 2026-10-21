@@ -66,7 +66,7 @@ When damaged, the tree gets a `Damaged` tag.
 
 ### Beetle emergence
 
-Once per year, `beetles_per_tree` individual beetles emerge from each tree that is both damaged and infected.
+Once per year, `beetles_per_tree` individual beetles emerge from each tree that is both colonized and infected.
 Each beetle starts at its source tree, and gets an exponentially distributed life span with mean `life_expectancy` ticks.
 
 ### Tree attraction
