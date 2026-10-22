@@ -83,6 +83,19 @@ $$A(x) = \max_s \; o_s^{k} \cdot 2^{-d(x,s)/h}$$
 
 with $k$ = `density_weight`. Thus, denser tree clusters attract beetles from farther away.
 
+*Rationale:* Beetles move to the neighboring cell with the highest attraction.
+Taking the maximum (rather than summing kernels over sources) keeps the field bounded,
+without a hard radius limit, and cheap to compute (two in-place sweeps).
+Further, every local maximum is a tree, so beetles cannot get trapped between trees.
+Summing variants were tried, but suffered from a background level dominated by distant trees,
+instability, or hard cut-offs.
+With deterministic neighbor choice, any monotone transformation of the final field
+(e.g. raising a summed field to a power) leaves all movement decisions unchanged.
+Density must therefore enter through the seeds, before aggregation.
+With $k = 0$, beetles simply head for the nearest tree.
+A source with $r$ times the occupancy of another wins up to $h \cdot k \cdot \log_2 r$ farther away.
+$k$ is a phenomenological parameter.
+
 ### Beetle movement
 
 Beetles move on the fine grid, making `steps_per_tick` steps per tick.
@@ -133,10 +146,6 @@ to each individual susceptible (damaged) tree,
 adding the `Colonized` tag on success.
 
 > Note: `beetles_per_tree` * `trees_per_beetle` = $R_0$ of the system.
-
-> Note: With $\sigma = 1-\text{removal-probability}$ (from tree removal)
-> and $p$ being the target beetle prevalence (in damaged trees), theoretically:  
-> $$R_0 = \dfrac{1}{\sigma(1-\sigma p)}$$
 
 ### Nematode infection
 
