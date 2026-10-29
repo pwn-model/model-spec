@@ -96,6 +96,30 @@ Attraction field of healthy trees, guiding beetles during maturation feeding
 | `density_radius` | Radius within which neighboring healthy trees count towards a tree's local density. Must be a multiple of the fine cell size *(ecological)* | 20 m | TODO | TODO |
 | `density_weight` | Exponent applied to a tree's local density to scale its attraction. 0 disables the density effect *(ecological)* | 1.0 | TODO | TODO |
 
+## CoarseTreeAttraction (damaged)
+
+Attraction field of damaged trees on a coarse grid. Not yet used by other systems
+
+| Parameter | Description | Value | Range | Source |
+|---|---|---|---|---|
+| `tick_of_year` | Week of the year when the attraction field is calculated *(technical)* | 18 week | 0 – 51 week | None, technical parameter |
+| `damaged_trees` | Whether this instance computes the attraction of damaged (true) or healthy (false) trees *(technical)* | true | – | None, technical parameter |
+| `cell_size` | Cell size of the coarse attraction grid. Must be a multiple of the fine cell size. The grid is rounded up if the world size is not a multiple of it *(technical)* | 100 m | TODO | None, technical parameter |
+| `half_distance` | Distance at which a coarse cell's attraction has decayed to half its value at the cell *(ecological)* | 200 m | TODO | TODO |
+| `density_weight` | Exponent applied to a coarse cell's occupancy (number of damaged trees divided by the number of fine cells per coarse cell) to scale its attraction. 0 disables the density effect *(ecological)* | 1.0 | TODO | TODO |
+
+## CoarseTreeAttraction (healthy)
+
+Attraction field of healthy trees on a coarse grid. Not yet used by other systems
+
+| Parameter | Description | Value | Range | Source |
+|---|---|---|---|---|
+| `tick_of_year` | Week of the year when the attraction field is calculated *(technical)* | 18 week | 0 – 51 week | None, technical parameter |
+| `damaged_trees` | Whether this instance computes the attraction of damaged (true) or healthy (false) trees *(technical)* | false | – | None, technical parameter |
+| `cell_size` | Cell size of the coarse attraction grid. Must be a multiple of the fine cell size. The grid is rounded up if the world size is not a multiple of it *(technical)* | 100 m | TODO | None, technical parameter |
+| `half_distance` | Distance at which a coarse cell's attraction has decayed to half its value at the cell *(ecological)* | 200 m | TODO | TODO |
+| `density_weight` | Exponent applied to a coarse cell's occupancy (number of healthy trees divided by the number of fine cells per coarse cell) to scale its attraction. 0 disables the density effect *(ecological)* | 1.0 | TODO | TODO |
+
 ## BeetleMovement
 
 Movement of nematode-carrying beetles during maturation feeding and egg laying
