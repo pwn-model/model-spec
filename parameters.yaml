@@ -278,6 +278,96 @@ systems:
         category: ecological
         source: TODO
 
+  - type: CoarseTreeAttraction
+    label: damaged
+    description: Attraction field of damaged trees on a coarse grid. Not yet used by other systems
+    parameters:
+      - name: tick_of_year
+        symbol: "-"
+        description: Week of the year when the attraction field is calculated
+        value: 18
+        unit: week
+        range: [0, 51]
+        category: technical
+        source: None, technical parameter
+      - name: damaged_trees
+        symbol: "-"
+        description: Whether this instance computes the attraction of damaged (true) or healthy (false) trees
+        value: true
+        unit: "-"
+        range: null
+        category: technical
+        source: None, technical parameter
+      - name: cell_size
+        symbol: "-"
+        description: Cell size of the coarse attraction grid. Must be a multiple of the fine cell size. The grid is rounded up if the world size is not a multiple of it
+        value: 100
+        unit: m
+        range: TODO
+        category: technical
+        source: None, technical parameter
+      - name: half_distance
+        symbol: "-"
+        description: Distance at which a coarse cell's attraction has decayed to half its value at the cell
+        value: 200
+        unit: m
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: density_weight
+        symbol: "-"
+        description: Exponent applied to a coarse cell's occupancy (number of damaged trees divided by the number of fine cells per coarse cell) to scale its attraction. 0 disables the density effect
+        value: 1.0
+        unit: "-"
+        range: TODO
+        category: ecological
+        source: TODO
+
+  - type: CoarseTreeAttraction
+    label: healthy
+    description: Attraction field of healthy trees on a coarse grid. Not yet used by other systems
+    parameters:
+      - name: tick_of_year
+        symbol: "-"
+        description: Week of the year when the attraction field is calculated
+        value: 18
+        unit: week
+        range: [0, 51]
+        category: technical
+        source: None, technical parameter
+      - name: damaged_trees
+        symbol: "-"
+        description: Whether this instance computes the attraction of damaged (true) or healthy (false) trees
+        value: false
+        unit: "-"
+        range: null
+        category: technical
+        source: None, technical parameter
+      - name: cell_size
+        symbol: "-"
+        description: Cell size of the coarse attraction grid. Must be a multiple of the fine cell size. The grid is rounded up if the world size is not a multiple of it
+        value: 100
+        unit: m
+        range: TODO
+        category: technical
+        source: None, technical parameter
+      - name: half_distance
+        symbol: "-"
+        description: Distance at which a coarse cell's attraction has decayed to half its value at the cell
+        value: 200
+        unit: m
+        range: TODO
+        category: ecological
+        source: TODO
+      - name: density_weight
+        symbol: "-"
+        description: Exponent applied to a coarse cell's occupancy (number of healthy trees divided by the number of fine cells per coarse cell) to scale its attraction. 0 disables the density effect
+        value: 1.0
+        unit: "-"
+        range: TODO
+        category: ecological
+        source: TODO
+
   - type: BeetleMovement
     description: Movement of nematode-carrying beetles during maturation feeding and egg laying
     parameters:
