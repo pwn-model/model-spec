@@ -70,7 +70,7 @@ Annual emergence of nematode-carrying beetles from damaged, infected trees
 |---|---|---|---|---|
 | `tick_of_year` | Week of the year when beetles emerge *(ecological)* | 19 week | 0 – 51 week | TODO |
 | `beetles_per_tree` | Number of beetles emerging from each damaged, infected tree *(ecological)* | 5 beetles / tree | TODO | TODO |
-| `life_expectancy` | Mean adult beetle life span (exponentially distributed) *(ecological)* | 5 weeks | TODO | TODO |
+| `life_expectancy` | Mean adult beetle life span (exponentially distributed). In Naves, Sousa, & Quartau (2006), mortality seems to be linear, with a maximum age of 120 days. However, this is a lab experiment.  *(ecological)* | 5 weeks | TODO | TODO |
 
 ## TreeAttraction (damaged)
 

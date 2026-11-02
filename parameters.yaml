@@ -181,7 +181,10 @@ systems:
         source: TODO
       - name: life_expectancy
         symbol: "-"
-        description: Mean adult beetle life span (exponentially distributed)
+        description: |
+          Mean adult beetle life span (exponentially distributed).
+          In Naves, Sousa, & Quartau, 2006, mortality seems to be linear,
+          with a maximum age of 120 days. However, this is a lab experiment.
         value: 5
         unit: weeks
         range: TODO
