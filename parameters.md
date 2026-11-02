@@ -127,8 +127,8 @@ Movement of nematode-carrying beetles during maturation feeding and egg laying
 | Parameter | Description | Value | Range | Source |
 |---|---|---|---|---|
 | `steps_per_tick` | Number of movement steps (to a neighboring fine grid cell) per week *(ecological)* | 7 steps / week | TODO | TODO |
-| `duration_feeding` | Duration of the maturation feeding phase after emergence *(ecological)* | 6 weeks | TODO | TODO |
-| `duration_egg_laying` | Duration of the egg laying phase after maturation feeding *(ecological)* | 6 weeks | TODO | TODO |
+| `duration_feeding` | Duration of the maturation feeding phase after emergence *(ecological)* | 3 weeks | TODO | Naves, Sousa, & Quartau, 2006 |
+| `duration_egg_laying` | Duration of the egg laying phase after maturation feeding *(ecological)* | 8 weeks | TODO | Naves, Sousa, & Quartau, 2006 |
 | `leave_tree_probability` | Per-step probability of a beetle to leave a suitable tree *(ecological)* | 0.25 1 / step | 0 – 1 1 / step | TODO |
 | `random_walk_probability` | Per-step probability of a moving beetle to move to a random neighbor cell rather than the most attractive one *(ecological)* | 0.6 1 / step | 0 – 1 1 / step | TODO |
 
