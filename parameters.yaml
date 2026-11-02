@@ -16,6 +16,20 @@
 #   category:    technical | ecological | management | scenario
 #   source:      literature or other source of the value
 #
+# Text fields (description, source) can cite entries of `references` by key,
+# as [@key] (Pandoc syntax). Note that a value starting with [@ must be quoted.
+#
+# Reference fields:
+#   key:         citation key, as used in [@key]
+#   authors:     list of authors, each as "Family, Initials"
+#   year:        publication year
+#   title:       title of the work
+#   journal:     journal name (optional)
+#   volume:      journal volume (optional)
+#   issue:       journal issue (optional)
+#   pages:       page range (optional)
+#   doi:         DOI, without https://doi.org/ (optional)
+#
 # One model tick is one week.
 
 resources:
@@ -183,7 +197,7 @@ systems:
         symbol: "-"
         description: |
           Mean adult beetle life span (exponentially distributed).
-          In Naves, Sousa, & Quartau, 2006, mortality seems to be linear,
+          In [@naves2006], mortality seems to be linear,
           with a maximum age of 120 days. However, this is a lab experiment.
         value: 5
         unit: weeks
@@ -389,7 +403,7 @@ systems:
         unit: weeks
         range: TODO
         category: ecological
-        source: Naves, Sousa, & Quartau, 2006
+        source: "[@naves2006]"
       - name: duration_egg_laying
         symbol: "-"
         description: Duration of the egg laying phase after maturation feeding
@@ -397,7 +411,7 @@ systems:
         unit: weeks
         range: TODO
         category: ecological
-        source: Naves, Sousa, & Quartau, 2006
+        source: "[@naves2006]"
       - name: leave_tree_probability
         symbol: "-"
         description: Per-step probability of a beetle to leave a suitable tree
@@ -494,3 +508,14 @@ systems:
         range: null
         category: technical
         source: None, technical parameter
+
+references:
+  - key: naves2006
+    authors: ["Naves, P.", "De Sousa, E.", "Quartau, J. A."]
+    year: 2006
+    title: "Reproductive traits of Monochamus galloprovincialis (Coleoptera: Cerambycidae) under laboratory conditions"
+    journal: Bulletin of Entomological Research
+    volume: 96
+    issue: 3
+    pages: 289-294
+    doi: 10.1079/BER2006422

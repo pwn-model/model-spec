@@ -70,7 +70,7 @@ Annual emergence of nematode-carrying beetles from damaged, infected trees
 |---|---|---|---|---|
 | `tick_of_year` | Week of the year when beetles emerge *(ecological)* | 19 week | 0 – 51 week | TODO |
 | `beetles_per_tree` | Number of beetles emerging from each damaged, infected tree *(ecological)* | 5 beetles / tree | TODO | TODO |
-| `life_expectancy` | Mean adult beetle life span (exponentially distributed). In Naves, Sousa, & Quartau (2006), mortality seems to be linear, with a maximum age of 120 days. However, this is a lab experiment.  *(ecological)* | 5 weeks | TODO | TODO |
+| `life_expectancy` | Mean adult beetle life span (exponentially distributed). In [Naves et al., 2006](#naves2006), mortality seems to be linear, with a maximum age of 120 days. However, this is a lab experiment.  *(ecological)* | 5 weeks | TODO | TODO |
 
 ## TreeAttraction (damaged)
 
@@ -127,8 +127,8 @@ Movement of nematode-carrying beetles during maturation feeding and egg laying
 | Parameter | Description | Value | Range | Source |
 |---|---|---|---|---|
 | `steps_per_tick` | Number of movement steps (to a neighboring fine grid cell) per week *(ecological)* | 7 steps / week | TODO | TODO |
-| `duration_feeding` | Duration of the maturation feeding phase after emergence *(ecological)* | 3 weeks | TODO | Naves, Sousa, & Quartau, 2006 |
-| `duration_egg_laying` | Duration of the egg laying phase after maturation feeding *(ecological)* | 8 weeks | TODO | Naves, Sousa, & Quartau, 2006 |
+| `duration_feeding` | Duration of the maturation feeding phase after emergence *(ecological)* | 3 weeks | TODO | [Naves et al., 2006](#naves2006) |
+| `duration_egg_laying` | Duration of the egg laying phase after maturation feeding *(ecological)* | 8 weeks | TODO | [Naves et al., 2006](#naves2006) |
 | `leave_tree_probability` | Per-step probability of a beetle to leave a suitable tree *(ecological)* | 0.25 1 / step | 0 – 1 1 / step | TODO |
 | `random_walk_probability` | Per-step probability of a moving beetle to move to a random neighbor cell rather than the most attractive one *(ecological)* | 0.6 1 / step | 0 – 1 1 / step | TODO |
 
@@ -160,3 +160,7 @@ Stops the simulation after a fixed number of ticks
 | Parameter | Description | Value | Range | Source |
 |---|---|---|---|---|
 | `steps` | Number of simulation ticks to run *(technical)* | 5200 weeks | – | None, technical parameter |
+
+## References
+
+- <a id="naves2006"></a>Naves, P., De Sousa, E., & Quartau, J. A. (2006). Reproductive traits of Monochamus galloprovincialis (Coleoptera: Cerambycidae) under laboratory conditions. *Bulletin of Entomological Research*, *96*(3), 289–294. https://doi.org/10.1079/BER2006422
