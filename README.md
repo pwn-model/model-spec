@@ -2,6 +2,8 @@
 
 Specification and documentation of the PWN model.
 
+Results of model experiments can be found under https://pwn-model.github.io/PWNModel.jl
+
 ## Model entities
 
 ### Trees
