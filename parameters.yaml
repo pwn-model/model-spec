@@ -181,7 +181,10 @@ systems:
         source: TODO
       - name: life_expectancy
         symbol: "-"
-        description: Mean adult beetle life span (exponentially distributed)
+        description: |
+          Mean adult beetle life span (exponentially distributed).
+          In Naves, Sousa, & Quartau, 2006, mortality seems to be linear,
+          with a maximum age of 120 days. However, this is a lab experiment.
         value: 5
         unit: weeks
         range: TODO
@@ -382,19 +385,19 @@ systems:
       - name: duration_feeding
         symbol: "-"
         description: Duration of the maturation feeding phase after emergence
-        value: 6
+        value: 3
         unit: weeks
         range: TODO
         category: ecological
-        source: TODO
+        source: Naves, Sousa, & Quartau, 2006
       - name: duration_egg_laying
         symbol: "-"
         description: Duration of the egg laying phase after maturation feeding
-        value: 6
+        value: 8
         unit: weeks
         range: TODO
         category: ecological
-        source: TODO
+        source: Naves, Sousa, & Quartau, 2006
       - name: leave_tree_probability
         symbol: "-"
         description: Per-step probability of a beetle to leave a suitable tree
