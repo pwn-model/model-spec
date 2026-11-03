@@ -128,7 +128,7 @@ Infection of healthy trees by feeding, nematode-carrying beetles
 
 | Parameter | Description | Value | Range | Source |
 |---|---|---|---|---|
-| `infection_probability` | Probability of a tree to become infected per feeding step of a beetle on it *(ecological)* | 0.01 1 / step | 0 – 1 1 / step | TODO |
+| `infection_probability` | Probability of a tree to become infected per feeding step of a beetle on it *(ecological)* | 0.02 1 / step | 0 – 1 1 / step | TODO |
 
 ## FixedTermination
 

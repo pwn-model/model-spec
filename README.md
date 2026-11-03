@@ -53,7 +53,7 @@ Infected trees become damaged (`Damaged` tag) `ticks_to_damage` ticks after infe
 
 ### Nematode release
 
-At tick `tick_of_infection`, `num_trees` healthy, uninfected trees, randomly selected
+At tick `tick_of_infection`, `num_trees` damaged, uninfected trees, randomly selected
 from the entire world, are infected with nematodes (`Infected` tag, with the time of infection).
 
 ### Background tree removal

@@ -411,7 +411,7 @@ systems:
       - name: infection_probability
         symbol: "-"
         description: Probability of a tree to become infected per feeding step of a beetle on it
-        value: 0.01
+        value: 0.02
         unit: 1 / step
         range: [0, 1]
         category: ecological
