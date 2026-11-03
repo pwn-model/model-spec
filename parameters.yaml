@@ -348,6 +348,14 @@ systems:
         range: [0, 1]
         category: ecological
         source: TODO
+      - name: emergence_flight_distance
+        symbol: "-"
+        description: Maximum distance of the undirected flight in a beetle's first step after emergence. The actual distance is drawn uniformly between 0 and this value
+        value: 100
+        unit: m
+        range: TODO
+        category: ecological
+        source: TODO
 
   - type: BeetleMortality
     description: Removal of beetles that reached the end of their life span
