@@ -69,7 +69,8 @@ When damaged, the tree gets a `Damaged` tag.
 ### Beetle emergence
 
 Once per year, `beetles_per_tree` individual beetles emerge from each tree that is both colonized and infected.
-Each beetle starts at its source tree, and gets an exponentially distributed life span with mean `life_expectancy` ticks.
+Each beetle starts at its source tree, and gets an exponentially distributed life span with mean `life_expectancy` ticks,
+capped at `max_age` ticks.
 
 ### Tree attraction
 
@@ -85,7 +86,11 @@ $$A(x) = \max_s \; o_s^{k} \cdot 2^{-d(x,s)/h}$$
 
 with $k$ = `density_weight`. Thus, denser tree clusters attract beetles from farther away.
 
-*Rationale:* Beetles move to the neighboring cell with the highest attraction.
+Along with the field, each cell records its *source*: the tree cell $s$ that attains the maximum.
+Beetles fly towards the source of the cell they are in (see [Beetle movement](#beetle-movement)).
+The source is not necessarily the nearest tree: a cell can be won by a farther, denser cluster.
+
+*Rationale:* An earlier movement variant (`BeetleMovementByField`) moved beetles to the neighboring cell with the highest attraction.
 Taking the maximum (rather than summing kernels over sources) keeps the field bounded,
 without a hard radius limit, and cheap to compute (two in-place sweeps).
 Further, every local maximum is a tree, so beetles cannot get trapped between trees.
@@ -100,15 +105,21 @@ $k$ is a phenomenological parameter.
 
 ### Beetle movement
 
-Beetles move on the fine grid, making `steps_per_tick` steps per tick.
-For the first `duration_feeding` ticks after emergence, beetles are feeding and target healthy trees.
-For the following `duration_egg_laying` ticks, they are egg laying and target damaged trees [not yet implemented, see [Background beetle colonization](#background-beetle-colonization) for now].
-Afterwards, they are inactive.
+Beetles move on the fine grid, making `steps_per_tick` steps (days) per tick.
+In each step, a beetle either feeds and targets healthy trees, or lays eggs and targets damaged trees.
+For the first `duration_feeding` ticks after emergence, beetles always feed.
+Afterwards, they feed with probability `feeding_probability` per step, and lay eggs otherwise.
 
-In each step, a beetle on a target tree stays there with probability 1 - `leave_tree_probability`.
-Otherwise, it moves to a neighboring cell (Moore neighborhood):
-with probability `random_walk_probability` to a random one,
-otherwise to the one with the highest attraction (see [Tree attraction](#tree-attraction)).
+In each step, a beetle can fly up to `distance_per_step`:
+
+1. A beetle on a target tree leaves it with probability `leave_tree_probability`.
+   It then walks cell by cell in a random direction (one of the 8 neighbor directions),
+   until it reaches a cell whose attraction source (see [Tree attraction](#tree-attraction)) is another tree,
+   or the step's distance is used up. Each cell costs one fine cell size of distance.
+   At the world's edge, it steps back and draws a new random direction.
+2. A beetle that is (still) on a target tree stays there.
+3. Otherwise, it flies straight towards the attraction source of its cell, with the remaining distance.
+   If the source is within reach, it lands there.
 
 For each step that a beetle ends on a target tree, a feeding event is counted for that tree's cell.
 

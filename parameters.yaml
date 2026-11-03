@@ -204,6 +204,16 @@ systems:
         range: TODO
         category: ecological
         source: TODO
+      - name: max_age
+        symbol: "-"
+        description: |
+          Maximum adult beetle life span. Caps the exponentially distributed life span.
+          In [@naves2006], the maximum age in the lab was 120 days.
+        value: 18
+        unit: weeks
+        range: TODO
+        category: ecological
+        source: "[@naves2006]"
 
   - type: TreeAttraction
     label: damaged
@@ -295,135 +305,45 @@ systems:
         category: ecological
         source: TODO
 
-  - type: CoarseTreeAttraction
-    label: damaged
-    description: Attraction field of damaged trees on a coarse grid. Not yet used by other systems
-    parameters:
-      - name: tick_of_year
-        symbol: "-"
-        description: Week of the year when the attraction field is calculated
-        value: 18
-        unit: week
-        range: [0, 51]
-        category: technical
-        source: None, technical parameter
-      - name: damaged_trees
-        symbol: "-"
-        description: Whether this instance computes the attraction of damaged (true) or healthy (false) trees
-        value: true
-        unit: "-"
-        range: null
-        category: technical
-        source: None, technical parameter
-      - name: cell_size
-        symbol: "-"
-        description: Cell size of the coarse attraction grid. Must be a multiple of the fine cell size. The grid is rounded up if the world size is not a multiple of it
-        value: 100
-        unit: m
-        range: TODO
-        category: technical
-        source: None, technical parameter
-      - name: half_distance
-        symbol: "-"
-        description: Distance at which a coarse cell's attraction has decayed to half its value at the cell
-        value: 200
-        unit: m
-        range: TODO
-        category: ecological
-        source: TODO
-      - name: density_weight
-        symbol: "-"
-        description: Exponent applied to a coarse cell's occupancy (number of damaged trees divided by the number of fine cells per coarse cell) to scale its attraction. 0 disables the density effect
-        value: 1.0
-        unit: "-"
-        range: TODO
-        category: ecological
-        source: TODO
-
-  - type: CoarseTreeAttraction
-    label: healthy
-    description: Attraction field of healthy trees on a coarse grid. Not yet used by other systems
-    parameters:
-      - name: tick_of_year
-        symbol: "-"
-        description: Week of the year when the attraction field is calculated
-        value: 18
-        unit: week
-        range: [0, 51]
-        category: technical
-        source: None, technical parameter
-      - name: damaged_trees
-        symbol: "-"
-        description: Whether this instance computes the attraction of damaged (true) or healthy (false) trees
-        value: false
-        unit: "-"
-        range: null
-        category: technical
-        source: None, technical parameter
-      - name: cell_size
-        symbol: "-"
-        description: Cell size of the coarse attraction grid. Must be a multiple of the fine cell size. The grid is rounded up if the world size is not a multiple of it
-        value: 100
-        unit: m
-        range: TODO
-        category: technical
-        source: None, technical parameter
-      - name: half_distance
-        symbol: "-"
-        description: Distance at which a coarse cell's attraction has decayed to half its value at the cell
-        value: 200
-        unit: m
-        range: TODO
-        category: ecological
-        source: TODO
-      - name: density_weight
-        symbol: "-"
-        description: Exponent applied to a coarse cell's occupancy (number of healthy trees divided by the number of fine cells per coarse cell) to scale its attraction. 0 disables the density effect
-        value: 1.0
-        unit: "-"
-        range: TODO
-        category: ecological
-        source: TODO
-
   - type: BeetleMovement
-    description: Movement of nematode-carrying beetles during maturation feeding and egg laying
+    description: Movement of nematode-carrying beetles during maturation feeding and egg laying, towards the attraction source
     parameters:
       - name: steps_per_tick
         symbol: "-"
-        description: Number of movement steps (to a neighboring fine grid cell) per week
+        description: Number of movement steps (days) per week
         value: 7
         unit: steps / week
         range: TODO
         category: ecological
         source: TODO
+      - name: distance_per_step
+        symbol: "-"
+        description: Maximum flight distance per step, shared by leaving a tree and the directed flight towards the attraction source
+        value: 2000
+        unit: m / step
+        range: TODO
+        category: ecological
+        source: TODO
       - name: duration_feeding
         symbol: "-"
-        description: Duration of the maturation feeding phase after emergence
+        description: Duration of the maturation feeding phase after emergence, during which beetles always target healthy trees
         value: 3
         unit: weeks
         range: TODO
         category: ecological
         source: "[@naves2006]"
-      - name: duration_egg_laying
+      - name: feeding_probability
         symbol: "-"
-        description: Duration of the egg laying phase after maturation feeding
-        value: 8
-        unit: weeks
-        range: TODO
-        category: ecological
-        source: "[@naves2006]"
-      - name: leave_tree_probability
-        symbol: "-"
-        description: Per-step probability of a beetle to leave a suitable tree
-        value: 0.25
+        description: Per-step probability of a beetle after maturation feeding to feed (target healthy trees) rather than to lay eggs (target damaged trees)
+        value: 0.5
         unit: 1 / step
         range: [0, 1]
         category: ecological
         source: TODO
-      - name: random_walk_probability
+      - name: leave_tree_probability
         symbol: "-"
-        description: Per-step probability of a moving beetle to move to a random neighbor cell rather than the most attractive one
-        value: 0.6
+        description: Per-step probability of a beetle to leave the target tree it is on
+        value: 0.25
         unit: 1 / step
         range: [0, 1]
         category: ecological
