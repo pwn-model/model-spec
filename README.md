@@ -112,11 +112,15 @@ Afterwards, they feed with probability `feeding_probability` per step, and lay e
 
 In each step, a beetle can fly up to `distance_per_step`:
 
-1. A beetle on a target tree leaves it with probability `leave_tree_probability`.
-   It then walks cell by cell in a random direction (one of the 8 neighbor directions),
+1. In its first step after emergence, a beetle makes an undirected flight away from the tree it emerged from,
+   over a distance drawn uniformly between 0 and `emergence_flight_distance` (but at most `distance_per_step`),
+   in a uniformly random direction.
+   This spreads out the beetles emerging from the same tree, which would otherwise all target the same first tree.
+   Otherwise, a beetle on a target tree leaves it with probability `leave_tree_probability`.
+   It then flies straight in a uniformly random direction, checking its cell after each fine cell size of distance,
    until it reaches a cell whose attraction source (see [Tree attraction](#tree-attraction)) is another tree,
-   or the step's distance is used up. Each cell costs one fine cell size of distance.
-   At the world's edge, it steps back and draws a new random direction.
+   or the step's distance is used up.
+   In both cases, a beetle that leaves the world dies.
 2. A beetle that is (still) on a target tree stays there.
 3. Otherwise, it flies straight towards the attraction source of its cell, with the remaining distance.
    If the source is within reach, it lands there.

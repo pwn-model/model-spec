@@ -108,6 +108,7 @@ Movement of nematode-carrying beetles during maturation feeding and egg laying, 
 | `duration_feeding` | Duration of the maturation feeding phase after emergence, during which beetles always target healthy trees *(ecological)* | 3 weeks | TODO | [Naves et al., 2006](#naves2006) |
 | `feeding_probability` | Per-step probability of a beetle after maturation feeding to feed (target healthy trees) rather than to lay eggs (target damaged trees) *(ecological)* | 0.5 1 / step | 0 – 1 1 / step | TODO |
 | `leave_tree_probability` | Per-step probability of a beetle to leave the target tree it is on *(ecological)* | 0.25 1 / step | 0 – 1 1 / step | TODO |
+| `emergence_flight_distance` | Maximum distance of the undirected flight in a beetle's first step after emergence. The actual distance is drawn uniformly between 0 and this value *(ecological)* | 100 m | TODO | TODO |
 
 ## Colonization
 
