@@ -109,6 +109,7 @@ Beetles move on the fine grid, making `steps_per_tick` steps (days) per tick.
 In each step, a beetle either feeds and targets healthy trees, or lays eggs and targets damaged trees.
 For the first `duration_feeding` ticks after emergence, beetles always feed.
 Afterwards, they feed with probability `feeding_probability` per step, and lay eggs otherwise.
+A beetle that is still on the way (see below) keeps its mode from the previous step.
 
 In each step, a beetle can fly up to `distance_per_step`:
 
@@ -121,9 +122,13 @@ In each step, a beetle can fly up to `distance_per_step`:
    until it reaches a cell whose attraction source (see [Tree attraction](#tree-attraction)) is another tree,
    or the step's distance is used up.
    In both cases, a beetle that leaves the world dies.
+   If a beetle leaving a tree runs out of distance, it continues this flight in the same direction in its next step.
 2. A beetle that is (still) on a target tree stays there.
 3. Otherwise, it flies straight towards the attraction source of its cell, with the remaining distance.
    If the source is within reach, it lands there.
+
+A beetle that runs out of distance before it has left the tree's area (1.) or reached its target (3.) is *on the way*.
+It keeps its mode for its next step, and does not decide anew between feeding and egg laying.
 
 For each step that a beetle ends on a target tree, a feeding event is counted for that tree's cell.
 
